@@ -51,3 +51,47 @@ take body send messsage as json
 {
 "message":"hello"
 }
+
+//create a file named .env
+import \* as dotenv from "dotenv"; add code
+
+add .env to the gitignore file
+
+add this to .env file
+NODE_ENV=development
+PORT=5100
+
+code server.js:
+import express from "express";
+import morgan from "morgan";
+import \* as dotenv from "dotenv";
+
+const app = express();
+
+if (process.env.NODE_ENV === "development") {
+app.use(morgan("dev")); //morgan and .env
+}
+
+app.use(morgan("dev"));
+app.use(express.json()); //middleware to accept data coming from front end
+
+app.get("/", (req, res) => {
+res.send("hello world");
+});
+
+app.post("/", (req, res) => {
+console.log(req);
+res.json({ message: "data received", messages: req.body }); //passing message
+});
+
+const port = process.env.PORT || 5100
+
+app.listen(port, () => {
+console.log(`server running on PORT ${port}`);
+});
+
+fetch("https://www.course-api.com/react-useReducer-cart-project")
+.then((res) => res.json())
+.then((data) => console.log(data)); //fetach data
+
+//whenever we using type:module don't forget to add .js when importing a file
