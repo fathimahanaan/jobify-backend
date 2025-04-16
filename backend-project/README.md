@@ -115,3 +115,22 @@ Catches any request that didn’t match a previous route.
 The \* matches all routes and all HTTP methods (GET, POST, etc).
 
 It’s a catch-all for 404 Not Found.
+
+//dont forget to install mongoose npm i mongoose
+
+install mongoose
+conenct in env
+import in server
+import mongoose from "mongoose";
+try {
+await mongoose.connect(process.env.MONGO_URL);
+console.log("✅ MongoDB connected");
+app.listen(port, () => {
+console.log(`server running on ${port}`);
+});
+} catch (error) {
+console.log("❌ MongoDB connection error:", error);
+process.exit(1);
+}
+
+create model

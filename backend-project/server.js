@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 const app = express();
 import morgan from "morgan";
-import { nanoid } from "nanoid";
+import mongoose from "mongoose";
 
 //routes
 import jobRouter from "./routes/jobRouter.js";
@@ -20,8 +20,7 @@ import jobRouter from "./routes/jobRouter.js";
 //   console.log(cartData);
 // } catch (error) {
 //   console.log(error);
-// }
-
+//  }
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev")); //morgan and .env
 }
@@ -58,8 +57,15 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5100; //setting port using env
 
-app.listen(port, () => {
-  console.log(`server running on ${port}`);
-});
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  console.log("✅ MongoDB connected");
+  app.listen(port, () => {
+    console.log(`server running on ${port}`);
+  });
+} catch (error) {
+  console.log("❌ MongoDB connection error:", error);
+  process.exit(1);
+}
 
 //whenever we using type:module don't forget to add .js when importing a file
