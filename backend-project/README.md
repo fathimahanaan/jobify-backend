@@ -95,3 +95,23 @@ fetch("https://www.course-api.com/react-useReducer-cart-project")
 .then((data) => console.log(data)); //fetach data
 
 //whenever we using type:module don't forget to add .js when importing a file
+
+app.use((err, req, res, next) => {
+console.log(err);
+res.status(500).json({ msg: `something went wrong` });
+});
+Catches any errors thrown inside your routes or middleware.
+
+The special part is the function signature: it has four arguments — err, req, res, next. That tells Express it's an error handler.
+
+It's for handling 500 Internal Server Errors, or any thrown error.
+
+app.use("\*", (req, res) => {
+res.status(404).json({ msg: "not found" });
+});
+
+Catches any request that didn’t match a previous route.
+
+The \* matches all routes and all HTTP methods (GET, POST, etc).
+
+It’s a catch-all for 404 Not Found.
