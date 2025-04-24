@@ -134,3 +134,8 @@ process.exit(1);
 }
 
 create model
+
+//async-errors - used to remove try catch
+create custom error
+create middleware for error
+create validation middleware where you to have to import validateion, body
