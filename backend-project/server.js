@@ -5,8 +5,6 @@ const app = express();
 import morgan from "morgan";
 import mongoose from "mongoose";
 
-import { validateTest } from "./middleware/validationMiddleware.js";
-
 //routes
 import jobRouter from "./routes/jobRouter.js";
 
@@ -41,6 +39,7 @@ app.use(express.json()); //middleware to accept data coming from front end
 //   res.json({ message: "data received", messages: req.body }); //passing message
 // });
 
+//router
 app.use("/api/v1/jobs", jobRouter);
 
 app.use("*", (req, res) => {
